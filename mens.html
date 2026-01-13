@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Men's Fashion Collection - Premium clothing for men. Shop the latest trends in men's fashion with free shipping on orders over $100.">
+    <title>Men's Collection - ASKT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clothing-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="askt.html" style="text-decoration: none; color: inherit;">
+                        <h1>ASKT</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="askt.html#home">Home</a></li>
+                    <li><a href="mens.html" class="active">Men</a></li>
+                    <li><a href="womens.html">Women</a></li>
+                    <li><a href="askt.html#about">About</a></li>
+                    <li><a href="askt.html#contact">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-breadcrumb"><a href="askt.html">Home</a> / Men's Collection</span>
+            <h1 class="page-title">Men's Collection</h1>
+            <p class="page-subtitle">Discover premium fashion designed for the modern gentleman</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="shirts">Shirts</option>
+                        <option value="pants">Pants</option>
+                        <option value="jackets">Jackets</option>
+                        <option value="shoes">Shoes</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Price:</label>
+                    <select id="priceFilter" class="filter-select">
+                        <option value="all">All Prices</option>
+                        <option value="low">Under $50</option>
+                        <option value="medium">$50 - $100</option>
+                        <option value="high">Over $100</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort By:</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="default">Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="shirts" data-price="29.99">
+                    <div class="product-image product-mens-shirt-1">
+                        <span class="product-badge">Bestseller</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(234)</span>
+                        </div>
+                        <h3>Classic White Dress Shirt</h3>
+                        <p class="product-description">100% cotton, wrinkle-free, professional fit</p>
+                        <div class="product-sizes">
+                            <span>S</span><span>M</span><span>L</span><span>XL</span><span>XXL</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$29.99</span>
+                            <span class="product-price-old">$39.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Classic White Dress Shirt')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="pants" data-price="79.99">
+                    <div class="product-image product-mens-jeans">
+                        <span class="product-badge new">New</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(189)</span>
+                        </div>
+                        <h3>Premium Slim Fit Jeans</h3>
+                        <p class="product-description">Stretch denim, multiple washes, comfortable fit</p>
+                        <div class="product-sizes">
+                            <span>28</span><span>30</span><span>32</span><span>34</span><span>36</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$79.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Premium Slim Fit Jeans')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="jackets" data-price="149.99">
+                    <div class="product-image product-mens-jacket">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(156)</span>
+                        </div>
+                        <h3>Leather Biker Jacket</h3>
+                        <p class="product-description">Genuine leather, classic biker style, premium quality</p>
+                        <div class="product-sizes">
+                            <span>S</span><span>M</span><span>L</span><span>XL</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$149.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Leather Biker Jacket')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="shirts" data-price="34.99">
+                    <div class="product-image product-mens-shirt-2">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(198)</span>
+                        </div>
+                        <h3>Casual Polo Shirt</h3>
+                        <p class="product-description">Breathable fabric, classic polo design, versatile</p>
+                        <div class="product-sizes">
+                            <span>S</span><span>M</span><span>L</span><span>XL</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$34.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Casual Polo Shirt')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card" data-category="pants" data-price="89.99">
+                    <div class="product-image product-mens-chinos">
+                        <span class="product-badge">Sale</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(167)</span>
+                        </div>
+                        <h3>Classic Chino Pants</h3>
+                        <p class="product-description">Smart casual, perfect fit, multiple colors</p>
+                        <div class="product-sizes">
+                            <span>30</span><span>32</span><span>34</span><span>36</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$89.99</span>
+                            <span class="product-price-old">$119.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Classic Chino Pants')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card" data-category="shoes" data-price="119.99">
+                    <div class="product-image product-mens-shoes">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(245)</span>
+                        </div>
+                        <h3>Leather Dress Shoes</h3>
+                        <p class="product-description">Premium leather, cushioned sole, formal style</p>
+                        <div class="product-sizes">
+                            <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$119.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Leather Dress Shoes')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card" data-category="shoes" data-price="99.99">
+                    <div class="product-image product-mens-sneakers">
+                        <span class="product-badge new">New</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(178)</span>
+                        </div>
+                        <h3>Classic Leather Sneakers</h3>
+                        <p class="product-description">Premium leather, all-day comfort, versatile style</p>
+                        <div class="product-sizes">
+                            <span>7</span><span>8</span><span>9</span><span>10</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$99.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Classic Leather Sneakers')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card" data-category="accessories" data-price="49.99">
+                    <div class="product-image product-mens-watch">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(312)</span>
+                        </div>
+                        <h3>Designer Watch</h3>
+                        <p class="product-description">Stainless steel, water-resistant, elegant design</p>
+                        <div class="product-sizes">
+                            <span>One Size</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$49.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Designer Watch')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ASKT</h3>
+                    <p>Your trusted destination for premium fashion. Quality clothing for the modern lifestyle.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Pinterest">📌</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="mens.html">Men's Collection</a></li>
+                        <li><a href="womens.html">Women's Collection</a></li>
+                        <li><a href="index.html#products">New Arrivals</a></li>
+                        <li><a href="index.html#products">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script src="mens.js"></script>
+</body>
+</html>
+

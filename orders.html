@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Management - Fashion Forward</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clothing-styles.css">
+    <link rel="stylesheet" href="orders.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="askt.html" style="text-decoration: none; color: inherit;">
+                        <h1>Fashion Forward</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="askt.html#home">Home</a></li>
+                    <li><a href="mens.html">Men</a></li>
+                    <li><a href="womens.html">Women</a></li>
+                    <li><a href="orders.html" class="active">Orders</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Orders Section -->
+    <section class="orders-section">
+        <div class="container">
+            <div class="orders-header">
+                <h2 class="section-title">Order Management</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="exportAllOrders()">Export JSON</button>
+                    <button class="btn btn-secondary" onclick="exportOrdersAsCSV()">Export CSV</button>
+                    <button class="btn btn-secondary" onclick="refreshOrders()">Refresh</button>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="statistics" id="statistics">
+                <!-- Statistics will be dynamically inserted here -->
+            </div>
+
+            <!-- Orders List -->
+            <div class="orders-container">
+                <div id="ordersList" class="orders-list">
+                    <!-- Orders will be dynamically inserted here -->
+                </div>
+                <div id="emptyOrders" class="empty-orders" style="display: none;">
+                    <p>No orders found</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal" style="display: none;">
+        <div class="modal-content large">
+            <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+            <div id="orderDetails">
+                <!-- Order details will be inserted here -->
+            </div>
+            <div class="modal-actions" id="modalActions" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                <!-- Action buttons will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Bill Template for Printing -->
+    <div id="billTemplate" style="display: none;"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Fashion Forward. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="orderManager.js"></script>
+    <script src="orders.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+

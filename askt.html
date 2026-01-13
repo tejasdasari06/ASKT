@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ASKT - just ask it.">
+    <title>ASKT - Premium Clothing & Fashion Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clothing-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="askt.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                        <img src="askt.png" alt="ASKT Logo" class="brand-logo" onerror="this.style.display='none';">
+                        <h1 class="brand-text">ASKT</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="askt.html#home">Home</a></li>
+                    <li><a href="mens.html">Men</a></li>
+                    <li><a href="womens.html">Women</a></li>
+                    <li><a href="askt.html#about">About</a></li>
+                    <li><a href="askt.html#contact">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-3d-bg"></div>
+        <div class="hero-content">
+            <span class="hero-badge">New Collection 2026</span>
+            <h2>Elevate Your Style</h2>
+            <p>Discover premium fashion that combines timeless elegance with contemporary design. Quality clothing crafted for the modern lifestyle.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Shop Collection</a>
+                <a href="#about" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="hero-features">
+                <div class="feature-item">
+                    <span class="feature-icon">🚚</span>
+                    <span>Free Shipping Over Rs.1000</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">↩️</span>
+                    <span>10-Day Returns</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <span>Secure Checkout</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-large">📦</div>
+                    <h3>Free Shipping</h3>
+                    <p>Free shipping on orders over Rs.1000. Fast and reliable delivery worldwide.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">↩️</div>
+                    <h3>Easy Returns</h3>
+                    <p>10-day hassle-free returns. We make it easy to exchange or return items.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">💳</div>
+                    <h3>Secure Payment</h3>
+                    <p>Multiple payment options with SSL encryption for your security.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">⭐</div>
+                    <h3>Quality Guaranteed</h3>
+                    <p>Premium quality materials and craftsmanship in every piece.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Our Collection</h2>
+            <div class="products-grid">
+                <div class="product-card product-card-3d">
+                    <div class="product-image product-tshirt product-3d-container">
+                        <span class="product-badge">Bestseller</span>
+                        <div class="tshirt-3d-viewer" data-product="tshirt-1">
+                            <div class="tshirt-3d-front"></div>
+                            <div class="tshirt-3d-back"></div>
+                            <div class="tshirt-3d-left"></div>
+                            <div class="tshirt-3d-right"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view" onclick="open3DViewer('tshirt-1')">3D View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(124)</span>
+                        </div>
+                        <h3>Classic Premium T-Shirt</h3>
+                        <p class="product-description">100% organic cotton, comfortable fit</p>
+                        <div class="product-sizes">
+                            <span>S</span><span>M</span><span>L</span><span>XL</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$29.99</span>
+                            <span class="product-price-old">$39.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Classic T-Shirt')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image product-jeans">
+                        <span class="product-badge new">New</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(89)</span>
+                        </div>
+                        <h3>Premium Denim Jeans</h3>
+                        <p class="product-description">Slim fit, stretch denim, multiple washes</p>
+                        <div class="product-sizes">
+                            <span>28</span><span>30</span><span>32</span><span>34</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$79.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Premium Jeans')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image product-jacket">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(156)</span>
+                        </div>
+                        <h3>Designer Leather Jacket</h3>
+                        <p class="product-description">Genuine leather, classic biker style</p>
+                        <div class="product-sizes">
+                            <span>S</span><span>M</span><span>L</span><span>XL</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$129.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Designer Jacket')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image product-dress">
+                        <span class="product-badge">Sale</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(203)</span>
+                        </div>
+                        <h3>Elegant Evening Dress</h3>
+                        <p class="product-description">Silk blend, A-line silhouette, perfect for events</p>
+                        <div class="product-sizes">
+                            <span>XS</span><span>S</span><span>M</span><span>L</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$89.99</span>
+                            <span class="product-price-old">$119.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Elegant Dress')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image product-shoes">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(167)</span>
+                        </div>
+                        <h3>Classic Leather Sneakers</h3>
+                        <p class="product-description">Premium leather, cushioned sole, all-day comfort</p>
+                        <div class="product-sizes">
+                            <span>7</span><span>8</span><span>9</span><span>10</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$99.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Stylish Shoes')">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image product-accessories">
+                        <span class="product-badge new">New</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(98)</span>
+                        </div>
+                        <h3>Designer Watch Collection</h3>
+                        <p class="product-description">Stainless steel, water-resistant, elegant design</p>
+                        <div class="product-sizes">
+                            <span>One Size</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$39.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Fashion Accessories')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="mens.html" class="btn btn-primary" style="margin-right: 1rem;">Shop Men's Collection</a>
+                <br><br><a href="womens.html" class="btn btn-primary">Shop Women's Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-subtitle">Our Story</span>
+                    <h2>About ASKT</h2>
+                    <p>At ASKT, we believe that style is a form of self-expression. Founded in 2015, our mission is to provide high-quality, fashionable clothing that helps you look and feel your best every day.</p>
+                    <p>With years of experience in the fashion industry, we curate collections that blend timeless elegance with contemporary trends. Every piece in our collection is carefully selected to ensure quality, comfort, and style. We work directly with trusted manufacturers to bring you the best value without compromising on quality.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Happy Customers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Products</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number"></div>
+                            <div class="stat-label">Gujarat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <span class="section-subtitle">What Our Customers Say</span>
+            <h2 class="section-title">Customer Reviews</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Absolutely love the quality of the clothes! The fit is perfect and the materials feel premium. Fast shipping too!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Mitchell</div>
+                            <div class="author-location">New York, USA</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★★</div>
+                    <p class="testimonial-text">"Best online shopping experience! Great customer service and the return process was super easy. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <div class="author-name">James Davis</div>
+                            <div class="author-location">London, UK</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">★★★★☆</div>
+                    <p class="testimonial-text">"Great selection and prices. The clothes are exactly as described. Will definitely shop here again!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EW</div>
+                        <div class="author-info">
+                            <div class="author-name">Emma Wilson</div>
+                            <div class="author-location">Sydney, Australia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <p>info@askt.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Phone</h3>
+                        <p>+91 ********</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Address</h3>
+                        <p>Surat ,Gujarat</p>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ASKT</h3>
+                    <p>Your trusted destination for premium clothing. Quality clothing for the modern lifestyle.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Pinterest">📌</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="askt.html#products">New Arrivals</a></li>
+                        <li><a href="mens.html">Men's Collection</a></li>
+                        <li><a href="womens.html">Women's Collection</a></li>
+                        <li><a href="askt.html#products">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="askt.html#contact">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="askt.html#about">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="orders.html">Order Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get special offers and updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+                <div class="payment-methods">
+                    <span>We Accept:</span>
+                    <span class="payment-icon">💳</span>
+                    <span class="payment-icon">🅿️</span>
+                    <span class="payment-icon">🍎</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 3D Viewer Modal -->
+    <div id="viewer3DModal" class="modal-3d">
+        <div class="modal-3d-content">
+            <span class="modal-3d-close">&times;</span>
+            <div class="viewer-3d-container">
+                <div class="viewer-3d-controls">
+                    <button class="view-control-btn" onclick="rotate3D('left')">← Rotate Left</button>
+                    <button class="view-control-btn" onclick="rotate3D('right')">Rotate Right →</button>
+                    <button class="view-control-btn" onclick="reset3DView()">Reset View</button>
+                </div>
+                <div id="tshirt3DViewer" class="tshirt-3d-interactive">
+                    <div class="tshirt-3d-face tshirt-front"></div>
+                    <div class="tshirt-3d-face tshirt-back"></div>
+                    <div class="tshirt-3d-face tshirt-left"></div>
+                    <div class="tshirt-3d-face tshirt-right"></div>
+                    <div class="tshirt-3d-face tshirt-top"></div>
+                    <div class="tshirt-3d-face tshirt-bottom"></div>
+                </div>
+                <div class="viewer-3d-info">
+                    <h3>Classic Premium T-Shirt</h3>
+                    <p>Drag to rotate • Scroll to zoom</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script src="3d-viewer.js"></script>
+</body>
+</html>
+

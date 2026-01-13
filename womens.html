@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Women's Fashion Collection - Premium clothing for women. Shop the latest trends in women's fashion with free shipping on orders over $100.">
+    <title>Women's Collection - ASKT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clothing-styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="askt.html" style="text-decoration: none; color: inherit;">
+                        <h1>ASKT</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="askt.html#home">Home</a></li>
+                    <li><a href="mens.html">Men</a></li>
+                    <li><a href="womens.html" class="active">Women</a></li>
+                    <li><a href="askt.html#about">About</a></li>
+                    <li><a href="askt.html#contact">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <span class="page-breadcrumb"><a href="askt.html">Home</a> / Women's Collection</span>
+            <h1 class="page-title">Women's Collection</h1>
+            <p class="page-subtitle">Discover elegant fashion designed for the modern woman</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Category:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="dresses">Dresses</option>
+                        <option value="tops">Tops</option>
+                        <option value="bottoms">Bottoms</option>
+                        <option value="jackets">Jackets</option>
+                        <option value="shoes">Shoes</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Price:</label>
+                    <select id="priceFilter" class="filter-select">
+                        <option value="all">All Prices</option>
+                        <option value="low">Under $50</option>
+                        <option value="medium">$50 - $100</option>
+                        <option value="high">Over $100</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Sort By:</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="default">Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Product 1 -->
+                <div class="product-card" data-category="dresses" data-price="89.99">
+                    <div class="product-image product-womens-dress-1">
+                        <span class="product-badge">Bestseller</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(312)</span>
+                        </div>
+                        <h3>Elegant Evening Dress</h3>
+                        <p class="product-description">Silk blend, A-line silhouette, perfect for events</p>
+                        <div class="product-sizes">
+                            <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$89.99</span>
+                            <span class="product-price-old">$119.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Elegant Evening Dress')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" data-category="tops" data-price="39.99">
+                    <div class="product-image product-womens-top-1">
+                        <span class="product-badge new">New</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(267)</span>
+                        </div>
+                        <h3>Classic Blouse</h3>
+                        <p class="product-description">Silk material, elegant design, versatile style</p>
+                        <div class="product-sizes">
+                            <span>XS</span><span>S</span><span>M</span><span>L</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$39.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Classic Blouse')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card" data-category="bottoms" data-price="69.99">
+                    <div class="product-image product-womens-pants">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(198)</span>
+                        </div>
+                        <h3>High-Waist Trousers</h3>
+                        <p class="product-description">Tailored fit, professional style, comfortable</p>
+                        <div class="product-sizes">
+                            <span>24</span><span>26</span><span>28</span><span>30</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$69.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('High-Waist Trousers')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card" data-category="dresses" data-price="79.99">
+                    <div class="product-image product-womens-dress-2">
+                        <span class="product-badge">Sale</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(234)</span>
+                        </div>
+                        <h3>Summer Floral Dress</h3>
+                        <p class="product-description">Lightweight fabric, floral print, perfect for summer</p>
+                        <div class="product-sizes">
+                            <span>XS</span><span>S</span><span>M</span><span>L</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$79.99</span>
+                            <span class="product-price-old">$99.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Summer Floral Dress')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card" data-category="jackets" data-price="129.99">
+                    <div class="product-image product-womens-jacket">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(189)</span>
+                        </div>
+                        <h3>Designer Blazer</h3>
+                        <p class="product-description">Tailored fit, professional style, premium quality</p>
+                        <div class="product-sizes">
+                            <span>XS</span><span>S</span><span>M</span><span>L</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$129.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Designer Blazer')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card" data-category="shoes" data-price="109.99">
+                    <div class="product-image product-womens-heels">
+                        <span class="product-badge new">New</span>
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-count">(156)</span>
+                        </div>
+                        <h3>Classic High Heels</h3>
+                        <p class="product-description">Elegant design, comfortable fit, premium leather</p>
+                        <div class="product-sizes">
+                            <span>6</span><span>7</span><span>8</span><span>9</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$109.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Classic High Heels')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card" data-category="shoes" data-price="89.99">
+                    <div class="product-image product-womens-flats">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(278)</span>
+                        </div>
+                        <h3>Comfortable Flats</h3>
+                        <p class="product-description">All-day comfort, versatile style, premium materials</p>
+                        <div class="product-sizes">
+                            <span>6</span><span>7</span><span>8</span><span>9</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$89.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Comfortable Flats')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card" data-category="accessories" data-price="59.99">
+                    <div class="product-image product-womens-handbag">
+                        <div class="product-overlay">
+                            <button class="btn-quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(345)</span>
+                        </div>
+                        <h3>Designer Handbag</h3>
+                        <p class="product-description">Premium leather, spacious, elegant design</p>
+                        <div class="product-sizes">
+                            <span>One Size</span>
+                        </div>
+                        <div class="product-price-row">
+                            <span class="product-price">$59.99</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addToCart('Designer Handbag')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ASKT</h3>
+                    <p>Your trusted destination for premium fashion. Quality clothing for the modern lifestyle.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Pinterest">📌</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="mens.html">Men's Collection</a></li>
+                        <li><a href="womens.html">Women's Collection</a></li>
+                        <li><a href="askt.html#products">New Arrivals</a></li>
+                        <li><a href="askt.html#products">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="askt.html#contact">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="askt.html#about">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script src="womens.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Fashion Forward</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clothing-styles.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="askt.html" style="text-decoration: none; color: inherit;">
+                        <h1>Fashion Forward</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="askt.html#home">Home</a></li>
+                    <li><a href="mens.html">Men</a></li>
+                    <li><a href="womens.html">Women</a></li>
+                    <li><a href="askt.html#about">About</a></li>
+                    <li><a href="askt.html#contact">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Payment Section -->
+    <section class="payment-section">
+        <div class="container">
+            <h2 class="section-title">Checkout</h2>
+            
+            <div class="checkout-content">
+                <div class="checkout-forms">
+                    <!-- Shipping Address -->
+                    <div class="form-section">
+                        <h3>Shipping Address</h3>
+                        <form id="shippingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name *</label>
+                                    <input type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone *</label>
+                                <input type="tel" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Address *</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>State *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>ZIP Code *</label>
+                                    <input type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Country *</label>
+                                <select required>
+                                    <option value="">Select Country</option>
+                                    <option value="IN">India</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="FR">France</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="ES">Spain</option>
+                                    <option value="JP">Japan</option>
+                                </select>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="sameAsBilling">
+                                    Use same address for billing
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Billing Address -->
+                    <div class="form-section" id="billingSection">
+                        <h3>Billing Address</h3>
+                        <form id="billingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name *</label>
+                                    <input type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address *</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>City *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>State *</label>
+                                    <input type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>ZIP Code *</label>
+                                    <input type="text" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Country *</label>
+                                <select required>
+                                    <option value="">Select Country</option>
+                                    <option value="IN">India</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="FR">France</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="ES">Spain</option>
+                                    <option value="JP">Japan</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3>Payment Method</h3>
+                        <div class="payment-methods">
+                            <div class="payment-option">
+                                <input type="radio" name="paymentMethod" value="credit" id="creditCard" checked>
+                                <label for="creditCard">
+                                    <span class="payment-icon">💳</span>
+                                    Credit/Debit Card
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" name="paymentMethod" value="paypal" id="paypal">
+                                <label for="paypal">
+                                    <span class="payment-icon">🅿️</span>
+                                    PayPal
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" name="paymentMethod" value="apple" id="applePay">
+                                <label for="applePay">
+                                    <span class="payment-icon">🍎</span>
+                                    Apple Pay
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" name="paymentMethod" value="google" id="googlePay">
+                                <label for="googlePay">
+                                    <span class="payment-icon">G</span>
+                                    Google Pay
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" name="paymentMethod" value="bank" id="bankTransfer">
+                                <label for="bankTransfer">
+                                    <span class="payment-icon">🏦</span>
+                                    Bank Transfer
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Credit Card Form -->
+                        <div id="creditCardForm" class="payment-form">
+                            <div class="form-group">
+                                <label>Card Number *</label>
+                                <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Expiry Date *</label>
+                                    <input type="text" placeholder="MM/YY" maxlength="5" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV *</label>
+                                    <input type="text" placeholder="123" maxlength="4" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Cardholder Name *</label>
+                                <input type="text" required>
+                            </div>
+                        </div>
+
+                        <!-- PayPal Form -->
+                        <div id="paypalForm" class="payment-form" style="display: none;">
+                            <p>You will be redirected to PayPal to complete your payment.</p>
+                            <div class="form-group">
+                                <label>PayPal Email *</label>
+                                <input type="email" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Other Payment Methods -->
+                        <div id="otherPaymentForm" class="payment-form" style="display: none;">
+                            <p>Payment will be processed securely through your selected method.</p>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Method -->
+                    <div class="form-section">
+                        <h3>Shipping Method</h3>
+                        <div class="shipping-options">
+                            <div class="shipping-option">
+                                <input type="radio" name="shipping" value="standard" id="standard" checked>
+                                <label for="standard">
+                                    <span class="shipping-name">Standard Shipping</span>
+                                    <span class="shipping-time">5-7 business days</span>
+                                    <span class="shipping-price">$5.99</span>
+                                </label>
+                            </div>
+                            <div class="shipping-option">
+                                <input type="radio" name="shipping" value="express" id="express">
+                                <label for="express">
+                                    <span class="shipping-name">Express Shipping</span>
+                                    <span class="shipping-time">2-3 business days</span>
+                                    <span class="shipping-price">$12.99</span>
+                                </label>
+                            </div>
+                            <div class="shipping-option">
+                                <input type="radio" name="shipping" value="overnight" id="overnight">
+                                <label for="overnight">
+                                    <span class="shipping-name">Overnight Shipping</span>
+                                    <span class="shipping-time">Next business day</span>
+                                    <span class="shipping-price">$24.99</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    <div id="orderItems" class="order-items">
+                        <!-- Order items will be dynamically inserted here -->
+                    </div>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="orderSubtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span id="orderShipping">$5.99</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax:</span>
+                            <span id="orderTax">$0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="orderTotal">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="security-info">
+                        <p>🔒 Secure checkout with SSL encryption</p>
+                    </div>
+                    <button class="btn btn-primary btn-place-order" id="placeOrderBtn">Place Order</button>
+                    <a href="cart.html" class="btn btn-secondary">Back to Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your purchase. Your order confirmation has been sent to your email.</p>
+            <p class="order-number">Order #<span id="orderNumber"></span></p>
+            <a href="askt.html" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Fashion Forward. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script src="orderManager.js"></script>
+    <script src="payment.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
