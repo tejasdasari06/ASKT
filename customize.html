@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Customize your T-Shirt - ASKT">
+    <title>Customize T-Shirt - ASKT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="clothing-styles.css">
+    <link rel="stylesheet" href="customize.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="askt.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                        <img src="askt.png" alt="ASKT Logo" class="brand-logo" onerror="this.style.display='none';">
+                        <h1 class="brand-text">ASKT</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="askt.html#home">Home</a></li>
+                    <li><a href="mens.html">Men</a></li>
+                    <li><a href="womens.html">Women</a></li>
+                    <li><a href="customize.html" class="active">Customize</a></li>
+                    <li><a href="askt.html#about">About</a></li>
+                    <li><a href="askt.html#contact">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Customization Section -->
+    <section class="customize-section">
+        <div class="container">
+            <h2 class="section-title">Customize Your T-Shirt</h2>
+            <p class="section-subtitle">Design your perfect t-shirt with custom designs, colors, and positioning</p>
+            
+            <div class="customize-container">
+                <!-- T-Shirt Preview Area -->
+                <div class="preview-panel">
+                    <div class="preview-header">
+                        <h3>Preview</h3>
+                        <button class="btn-reset" onclick="resetCustomization()">Reset</button>
+                    </div>
+                    <div class="tshirt-preview-container">
+                        <div id="tshirtPreview" class="tshirt-preview">
+                            <div id="designLayer" class="design-layer">
+                                <!-- Designs will be added here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-controls">
+                        <button class="btn-preview" onclick="switchView('front')">Front</button>
+                        <button class="btn-preview active" onclick="switchView('back')">Back</button>
+                    </div>
+                </div>
+
+                <!-- Customization Controls -->
+                <div class="controls-panel">
+                    <!-- T-Shirt Color Selection -->
+                    <div class="control-group">
+                        <h3 class="control-title">T-Shirt Color</h3>
+                        <div class="color-picker-container">
+                            <input type="color" id="tshirtColor" value="#ffffff" onchange="updateTshirtColor(this.value)">
+                            <div class="color-presets">
+                                <div class="color-preset" data-color="#ffffff" style="background: #ffffff; border: 1px solid #ddd;" onclick="setTshirtColor('#ffffff')"></div>
+                                <div class="color-preset" data-color="#000000" style="background: #000000;" onclick="setTshirtColor('#000000')"></div>
+                                <div class="color-preset" data-color="#ff0000" style="background: #ff0000;" onclick="setTshirtColor('#ff0000')"></div>
+                                <div class="color-preset" data-color="#0000ff" style="background: #0000ff;" onclick="setTshirtColor('#0000ff')"></div>
+                                <div class="color-preset" data-color="#00ff00" style="background: #00ff00;" onclick="setTshirtColor('#00ff00')"></div>
+                                <div class="color-preset" data-color="#ffff00" style="background: #ffff00;" onclick="setTshirtColor('#ffff00')"></div>
+                                <div class="color-preset" data-color="#ff00ff" style="background: #ff00ff;" onclick="setTshirtColor('#ff00ff')"></div>
+                                <div class="color-preset" data-color="#808080" style="background: #808080;" onclick="setTshirtColor('#808080')"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Design Section -->
+                    <div class="control-group">
+                        <h3 class="control-title">Add Design</h3>
+                        <div class="design-options">
+                            <div class="design-option">
+                                <label for="uploadImage" class="upload-label">
+                                    <span class="upload-icon">📷</span>
+                                    <span>Upload Image</span>
+                                </label>
+                                <input type="file" id="uploadImage" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
+                            </div>
+                            <div class="design-option">
+                                <button class="btn-add-text" onclick="addTextDesign()">
+                                    <span class="upload-icon">✏️</span>
+                                    <span>Add Text</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text Design Options -->
+                    <div class="control-group" id="textDesignGroup" style="display: none;">
+                        <h3 class="control-title">Text Design</h3>
+                        <div class="text-controls">
+                            <input type="text" id="textInput" placeholder="Enter your text" class="text-input">
+                            <div class="text-style-controls">
+                                <label>Font Size:</label>
+                                <input type="range" id="fontSize" min="20" max="100" value="40" oninput="updateTextStyle()">
+                                <span id="fontSizeValue">40px</span>
+                            </div>
+                            <div class="text-style-controls">
+                                <label>Text Color:</label>
+                                <input type="color" id="textColor" value="#000000" onchange="updateTextStyle()">
+                            </div>
+                            <div class="text-style-controls">
+                                <label>Font Family:</label>
+                                <select id="fontFamily" onchange="updateTextStyle()">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Courier New">Courier New</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Verdana">Verdana</option>
+                                    <option value="Impact">Impact</option>
+                                </select>
+                            </div>
+                            <button class="btn-apply-text" onclick="applyTextDesign()">Apply Text</button>
+                        </div>
+                    </div>
+
+                    <!-- Active Designs List -->
+                    <div class="control-group">
+                        <h3 class="control-title">Active Designs</h3>
+                        <div id="designsList" class="designs-list">
+                            <p class="no-designs">No designs added yet</p>
+                        </div>
+                    </div>
+
+                    <!-- Position Controls -->
+                    <div class="control-group" id="positionControls" style="display: none;">
+                        <h3 class="control-title">Position</h3>
+                        <div class="position-controls">
+                            <div class="position-row">
+                                <label>X Position:</label>
+                                <input type="range" id="posX" min="0" max="100" value="50" oninput="updateDesignPosition()">
+                                <span id="posXValue">50%</span>
+                            </div>
+                            <div class="position-row">
+                                <label>Y Position:</label>
+                                <input type="range" id="posY" min="0" max="100" value="50" oninput="updateDesignPosition()">
+                                <span id="posYValue">50%</span>
+                            </div>
+                            <div class="position-row">
+                                <label>Size:</label>
+                                <input type="range" id="designSize" min="20" max="200" value="100" oninput="updateDesignPosition()">
+                                <span id="sizeValue">100%</span>
+                            </div>
+                            <div class="position-row">
+                                <label>Rotation:</label>
+                                <input type="range" id="designRotation" min="0" max="360" value="0" oninput="updateDesignPosition()">
+                                <span id="rotationValue">0°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart -->
+                    <div class="control-group">
+                        <button class="btn-add-to-cart" onclick="addCustomizedToCart()">Add to Cart</button>
+                        <p class="price-info">Starting at ₹599</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ASKT</h3>
+                    <p>Your trusted destination for premium clothing. Quality clothing for the modern lifestyle.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="askt.html#products">New Arrivals</a></li>
+                        <li><a href="mens.html">Men's Collection</a></li>
+                        <li><a href="womens.html">Women's Collection</a></li>
+                        <li><a href="customize.html">Customize</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="askt.html#contact">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script src="customize.js"></script>
+</body>
+</html>
+

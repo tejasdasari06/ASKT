@@ -94,11 +94,34 @@ function updateQuantity(productName, newQuantity) {
 // Calculate totals
 function calculateTotals() {
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = subtotal > 100 ? 0 : 5.99;
-    const tax = subtotal * 0.08; // 8% tax
+    const shipping = subtotal > 1000 ? 0 : 50; // Free shipping over ₹1000
+    const tax = subtotal * 0.18; // 18% GST
     const total = subtotal + shipping + tax;
     
     return { subtotal, shipping, tax, total };
+}
+
+// Update quantity by index (for customized products)
+function updateQuantityByIndex(index, newQuantity) {
+    if (newQuantity <= 0) {
+        removeFromCartByIndex(index);
+        return;
+    }
+    
+    if (cart[index]) {
+        cart[index].quantity = newQuantity;
+        saveCart();
+        renderCart();
+    }
+}
+
+// Remove from cart by index (for customized products)
+function removeFromCartByIndex(index) {
+    if (cart[index]) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCart();
+    }
 }
 
 // Render cart items
@@ -118,31 +141,46 @@ function renderCart() {
     emptyCart.style.display = 'none';
     cartContent.style.display = 'grid';
     
-    cartItemsList.innerHTML = cart.map(item => `
+    cartItemsList.innerHTML = cart.map((item, index) => {
+        // Handle customized products with image data URLs
+        let imageHtml = '';
+        if (item.image && item.image.startsWith('data:image')) {
+            // Customized product with preview image
+            imageHtml = `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px;">`;
+        } else {
+            // Regular product
+            imageHtml = item.image || 'T-Shirt';
+        }
+        
+        // Create unique identifier for customized products
+        const itemId = item.customization ? `custom-${index}` : item.name;
+        
+        return `
         <div class="cart-item">
-            <div class="cart-item-image">${item.image}</div>
+            <div class="cart-item-image">${imageHtml}</div>
             <div class="cart-item-details">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                <div class="cart-item-name">${item.name}${item.customization ? ' <span style="color: #d4af37; font-size: 0.85em;">(Customized)</span>' : ''}</div>
+                <div class="cart-item-price">₹${item.price.toFixed(2)}</div>
                 <div class="cart-item-controls">
                     <div class="quantity-control">
-                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', ${item.quantity - 1})">-</button>
+                        <button class="quantity-btn" onclick="updateQuantityByIndex(${index}, ${item.quantity - 1})">-</button>
                         <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                               onchange="updateQuantity('${item.name}', parseInt(this.value))">
-                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', ${item.quantity + 1})">+</button>
+                               onchange="updateQuantityByIndex(${index}, parseInt(this.value))">
+                        <button class="quantity-btn" onclick="updateQuantityByIndex(${index}, ${item.quantity + 1})">+</button>
                     </div>
-                    <button class="remove-btn" onclick="removeFromCart('${item.name}')">Remove</button>
+                    <button class="remove-btn" onclick="removeFromCartByIndex(${index})">Remove</button>
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
     
     // Update summary
     const { subtotal, shipping, tax, total } = calculateTotals();
-    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
-    document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
-    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+    document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `₹${shipping.toFixed(2)}`;
+    document.getElementById('tax').textContent = `₹${tax.toFixed(2)}`;
+    document.getElementById('total').textContent = `₹${total.toFixed(2)}`;
 }
 
 // Apply coupon
@@ -206,6 +244,8 @@ if (window.location.pathname.includes('cart.html')) {
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.updateQuantity = updateQuantity;
+window.updateQuantityByIndex = updateQuantityByIndex;
+window.removeFromCartByIndex = removeFromCartByIndex;
 window.applyCoupon = applyCoupon;
 window.calculateTotals = calculateTotals;
 window.getCart = () => cart;
