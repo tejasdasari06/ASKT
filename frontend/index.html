@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASKT - Premium Streetwear Collection</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="brand">ASKT</a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="men.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">NEW COLLECTION</span>
+            <h1>Elevate Your<br>Street Style</h1>
+            <p>Discover premium streetwear that combines bold design with unmatched quality. Crafted for those who dare to stand out.</p>
+            <a href="shop.html" class="btn btn-primary">Shop Now</a>
+            <div class="hero-image">
+                <svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="100" y="50" width="200" height="300" rx="10" fill="#1a1a1a" stroke="#ff6b35" stroke-width="3"/>
+                    <rect x="120" y="80" width="160" height="200" rx="5" fill="#2a2a2a"/>
+                    <circle cx="200" cy="150" r="30" fill="#ff6b35"/>
+                    <rect x="120" y="200" width="160" height="20" rx="10" fill="#ff6b35"/>
+                    <rect x="120" y="230" width="160" height="20" rx="10" fill="#ff6b35"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Preview -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Featured Collection</h2>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Products will be loaded via JavaScript -->
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="shop.html" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ASKT</h4>
+                    <p>Premium streetwear for the bold and fearless. Quality clothing that defines your style.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="men.html">Men's Collection</a></li>
+                        <li><a href="women.html">Women's Collection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Load featured products
+        async function loadFeaturedProducts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/products?limit=4`);
+                const products = await response.json();
+                const grid = document.getElementById('featuredProducts');
+                
+                if (products.length === 0) {
+                    grid.innerHTML = '<p class="empty-state">No products available</p>';
+                    return;
+                }
+
+                grid.innerHTML = products.map(product => `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image || 'https://via.placeholder.com/300x400?text=ASKT'}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <p>${product.category}</p>
+                            <span class="product-price">₹${product.price}</span>
+                            <a href="product.html?id=${product._id}" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">View Product</a>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading products:', error);
+                document.getElementById('featuredProducts').innerHTML = '<p class="empty-state">Unable to load products. Please check your connection.</p>';
+            }
+        }
+
+        loadFeaturedProducts();
+    </script>
+</body>
+</html>

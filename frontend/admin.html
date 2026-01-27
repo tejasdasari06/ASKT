@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - ASKT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="brand">ASKT</a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Back to Store</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Admin Section -->
+    <section class="admin">
+        <div class="container">
+            <!-- Login Form -->
+            <div id="loginSection" class="admin-login">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Admin Login</h2>
+                <form onsubmit="adminLogin(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="dashboardSection" class="admin-dashboard" style="display: none;">
+                <h2 class="section-title">Admin Dashboard</h2>
+
+                <!-- Add Product Section -->
+                <div class="admin-section">
+                    <h2>Add New Product</h2>
+                    <form onsubmit="addProduct(event)" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₹)</label>
+                            <input type="number" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="category" required style="width: 100%; padding: 1rem; background: var(--bg-dark); border: 2px solid var(--border); border-radius: 10px; color: var(--text-primary);">
+                                <option value="Men">Men</option>
+                                <option value="Women">Women</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Image URL</label>
+                            <input type="url" name="image" required>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Sizes (comma separated: S,M,L,XL)</label>
+                            <input type="text" name="sizes" value="S,M,L,XL" required>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Stock</label>
+                            <input type="number" name="stock" value="10" required>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Products List -->
+                <div class="admin-section">
+                    <h2>All Products</h2>
+                    <div id="productsList">
+                        <!-- Products will be loaded -->
+                    </div>
+                </div>
+
+                <!-- Orders List -->
+                <div class="admin-section">
+                    <h2>All Orders</h2>
+                    <div id="ordersList">
+                        <!-- Orders will be loaded -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/config.js"></script>
+    <script>
+        const ADMIN_EMAIL = 'admin@askt.com';
+        const ADMIN_PASSWORD = 'askt@123';
+
+        function adminLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+
+            if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                loadProducts();
+                loadOrders();
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        async function addProduct(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const productData = {
+                name: formData.get('name'),
+                price: parseInt(formData.get('price')),
+                category: formData.get('category'),
+                image: formData.get('image'),
+                sizes: formData.get('sizes').split(',').map(s => s.trim()),
+                stock: parseInt(formData.get('stock'))
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/products`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(productData)
+                });
+
+                if (response.ok) {
+                    alert('Product added successfully!');
+                    event.target.reset();
+                    loadProducts();
+                } else {
+                    alert('Failed to add product');
+                }
+            } catch (error) {
+                console.error('Error adding product:', error);
+                alert('Error adding product');
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/products`);
+                const products = await response.json();
+                const container = document.getElementById('productsList');
+                
+                if (products.length === 0) {
+                    container.innerHTML = '<p>No products</p>';
+                    return;
+                }
+
+                container.innerHTML = `
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${products.map(product => `
+                                <tr>
+                                    <td>${product.name}</td>
+                                    <td>${product.category}</td>
+                                    <td>₹${product.price}</td>
+                                    <td>${product.stock}</td>
+                                    <td>
+                                        <button class="btn btn-outline" onclick="deleteProduct('${product._id}')" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Delete</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        async function loadOrders() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/orders`);
+                const orders = await response.json();
+                const container = document.getElementById('ordersList');
+                
+                if (orders.length === 0) {
+                    container.innerHTML = '<p>No orders</p>';
+                    return;
+                }
+
+                container.innerHTML = `
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${orders.map(order => `
+                                <tr>
+                                    <td>${order._id.substring(0, 8)}...</td>
+                                    <td>${order.customer.name}<br>${order.customer.email}</td>
+                                    <td>${order.items.length} item(s)</td>
+                                    <td>₹${order.totalPrice}</td>
+                                    <td>${order.paymentStatus}</td>
+                                    <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+
+        async function deleteProduct(productId) {
+            if (!confirm('Are you sure you want to delete this product?')) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/products/${productId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Product deleted');
+                    loadProducts();
+                } else {
+                    alert('Failed to delete product');
+                }
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('Error deleting product');
+            }
+        }
+    </script>
+</body>
+</html>

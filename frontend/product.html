@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - ASKT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="brand">ASKT</a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="men.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Product Detail -->
+    <section class="products" style="padding-top: 8rem;">
+        <div class="container">
+            <div id="productDetail" style="max-width: 1200px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                    <div class="product-image" style="height: 600px; border-radius: 20px;">
+                        <img id="productImage" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+                    </div>
+                    <div>
+                        <h1 id="productName" style="font-size: 2.5rem; margin-bottom: 1rem;"></h1>
+                        <p id="productCategory" style="color: var(--text-secondary); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;"></p>
+                        <div class="product-price" id="productPrice" style="font-size: 2rem; margin-bottom: 2rem;"></div>
+                        
+                        <div style="margin-bottom: 2rem;">
+                            <label style="display: block; margin-bottom: 1rem; font-weight: 600; text-transform: uppercase; font-size: 0.85rem;">Select Size</label>
+                            <div class="product-sizes" id="sizeSelection">
+                                <!-- Sizes will be loaded -->
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="addToCartBtn" style="width: 100%; padding: 1.25rem; font-size: 1.1rem;" onclick="addToCartFromDetail()">
+                            Add to Cart
+                        </button>
+
+                        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                            <h3 style="margin-bottom: 1rem;">Product Details</h3>
+                            <p id="productDescription" style="color: var(--text-secondary); line-height: 1.8;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ASKT</h4>
+                    <p>Premium streetwear for the bold and fearless.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html">All Products</a></li>
+                        <li><a href="men.html">Men's Collection</a></li>
+                        <li><a href="women.html">Women's Collection</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        let currentProduct = null;
+        let selectedSize = null;
+
+        async function loadProduct() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                document.getElementById('productDetail').innerHTML = '<p class="empty-state">Product not found</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/products/${productId}`);
+                currentProduct = await response.json();
+
+                document.getElementById('productName').textContent = currentProduct.name;
+                document.getElementById('productCategory').textContent = currentProduct.category;
+                document.getElementById('productPrice').textContent = `₹${currentProduct.price}`;
+                document.getElementById('productImage').src = currentProduct.image || 'https://via.placeholder.com/600x800?text=ASKT';
+                document.getElementById('productDescription').textContent = `Premium quality ${currentProduct.category.toLowerCase()} t-shirt. Made with the finest materials for comfort and style. Available in multiple sizes.`;
+
+                // Load sizes
+                const sizes = currentProduct.sizes || ['S', 'M', 'L', 'XL'];
+                const sizeContainer = document.getElementById('sizeSelection');
+                sizeContainer.innerHTML = sizes.map(size => `
+                    <button class="size-btn" onclick="selectSize('${size}')">${size}</button>
+                `).join('');
+
+                // Select first size by default
+                if (sizes.length > 0) {
+                    selectSize(sizes[0]);
+                }
+            } catch (error) {
+                console.error('Error loading product:', error);
+                document.getElementById('productDetail').innerHTML = '<p class="empty-state">Unable to load product. Please check your connection.</p>';
+            }
+        }
+
+        function selectSize(size) {
+            selectedSize = size;
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === size) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function addToCartFromDetail() {
+            if (!currentProduct) return;
+            if (!selectedSize) {
+                alert('Please select a size');
+                return;
+            }
+
+            const cartItem = {
+                id: currentProduct._id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                image: currentProduct.image || 'https://via.placeholder.com/300x400?text=ASKT',
+                size: selectedSize,
+                quantity: 1
+            };
+
+            addToCart(cartItem);
+            alert('Added to cart!');
+        }
+
+        loadProduct();
+    </script>
+</body>
+</html>

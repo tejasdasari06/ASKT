@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - ASKT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="brand">ASKT</a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="men.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart">
+        <div class="container">
+            <h2 class="section-title">Your Cart</h2>
+            
+            <div id="cartItems">
+                <!-- Cart items will be loaded via JavaScript -->
+            </div>
+
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">₹0</span>
+                </div>
+                <a href="checkout.html" class="btn btn-primary" style="width: 100%; margin-top: 2rem; text-align: center;">Proceed to Checkout</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ASKT</h4>
+                    <p>Premium streetwear for the bold and fearless.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        function loadCart() {
+            const cart = getCart();
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartSummary = document.getElementById('cartSummary');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🛒</div>
+                        <h3>Your cart is empty</h3>
+                        <p>Start shopping to add items to your cart</p>
+                        <a href="shop.html" class="btn btn-primary" style="margin-top: 2rem;">Continue Shopping</a>
+                    </div>
+                `;
+                cartSummary.style.display = 'none';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Size: ${item.size || 'N/A'}</p>
+                        <p style="color: var(--accent); font-weight: 700; font-size: 1.25rem;">₹${item.price}</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                </div>
+            `).join('');
+
+            cartSummary.style.display = 'block';
+            updateCartSummary();
+        }
+
+        function updateQuantity(index, change) {
+            const cart = getCart();
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            
+            saveCart(cart);
+            updateCartCount();
+            loadCart();
+        }
+
+        function removeFromCart(index) {
+            const cart = getCart();
+            cart.splice(index, 1);
+            saveCart(cart);
+            updateCartCount();
+            loadCart();
+        }
+
+        function updateCartSummary() {
+            const cart = getCart();
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            document.getElementById('subtotal').textContent = `₹${subtotal}`;
+            document.getElementById('total').textContent = `₹${subtotal}`;
+        }
+
+        loadCart();
+    </script>
+</body>
+</html>

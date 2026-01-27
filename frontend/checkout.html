@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ASKT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="brand">ASKT</a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="men.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a></li>
+                </ul>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout">
+        <div class="container">
+            <h2 class="section-title">Checkout</h2>
+            
+            <form class="checkout-form" id="checkoutForm" onsubmit="placeOrder(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" name="state" required>
+                </div>
+                <div class="form-group">
+                    <label>PIN Code</label>
+                    <input type="text" name="pincode" required>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="checkoutSubtotal">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="checkoutTotal">₹0</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Place Order</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ASKT</h4>
+                    <p>Premium streetwear for the bold and fearless.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ASKT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        function loadCheckoutSummary() {
+            const cart = getCart();
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('checkoutSubtotal').textContent = `₹${subtotal}`;
+            document.getElementById('checkoutTotal').textContent = `₹${subtotal}`;
+        }
+
+        async function placeOrder(event) {
+            event.preventDefault();
+            
+            const cart = getCart();
+            if (cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+
+            const formData = new FormData(event.target);
+            const orderData = {
+                customer: {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    state: formData.get('state'),
+                    pincode: formData.get('pincode')
+                },
+                items: cart,
+                totalPrice: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                paymentStatus: 'pending'
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/orders`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (response.ok) {
+                    // Clear cart
+                    clearCart();
+                    updateCartCount();
+                    
+                    // Redirect to success page
+                    window.location.href = 'success.html';
+                } else {
+                    alert('Failed to place order. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error placing order:', error);
+                alert('Error placing order. Please check your connection.');
+            }
+        }
+
+        loadCheckoutSummary();
+    </script>
+</body>
+</html>
